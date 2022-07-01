@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
+import UserProfile from "./UserProfile";
 
 function UserSelector() {
-  console.log("hi");
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = () => {
+    axios.get("http://localhost:3100/users").then((res) => {
+      console;
+      setUsers(res);
+    });
+  };
 
   return (
     <>
       <UserWrap>
         <SignText>Who's watching?</SignText>
         <Users>
-          <User></User>
-          <User></User>
-          <User></User>
-          <User></User>
+          {users.map((user) => {
+            <UserProfile key={user.id} user={user} />;
+          })}
         </Users>
       </UserWrap>
     </>
@@ -35,14 +47,6 @@ const Users = styled.ul`
 const SignText = styled.div`
   color: #ebebeb;
   text-align: center;
-`;
-
-const User = styled.div`
-  width: 180px;
-  height: 180px;
-  border-radius: 10px;
-  background-color: #676aa0;
-  margin: 0 15px;
 `;
 
 export default UserSelector;
