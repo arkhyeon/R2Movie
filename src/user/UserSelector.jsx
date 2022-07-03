@@ -12,7 +12,7 @@ function UserSelector() {
 
   const getUsers = () => {
     axios.get("http://localhost:3100/users").then((res) => {
-      console;
+      console.log(res);
       setUsers(res);
     });
   };
