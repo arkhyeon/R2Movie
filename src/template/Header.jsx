@@ -1,31 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/all";
 import styled from "@emotion/styled";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
+import { getCookie } from "../lib/cookie";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const a = useLocation();
+  const [b, setB] = useState(false);
+  console.log(getCookie("R2USER"));
+  useEffect(() => {
+    setB(a.pathname !== "user");
+  }, [b]);
   return (
     <HeaderWrap>
       <MenuWrap>
         <img src="src/resource/img/logo.png" alt="logo" />
-        <NavLink to="/trend">
-          <li>Trend</li>
-        </NavLink>
-        <NavLink to="/movie">
-          <li>Movie</li>
-        </NavLink>
-        <NavLink to="/series">
-          <li>Series</li>
-        </NavLink>
-        <NavLink to="/library">
-          <li>Library</li>
-        </NavLink>
+        {b ? (
+          <>
+            <NavLink to="/trend">
+              <li>Trend</li>
+            </NavLink>
+            <NavLink to="/movie">
+              <li>Movie</li>
+            </NavLink>
+            <NavLink to="/series">
+              <li>Series</li>
+            </NavLink>
+            <NavLink to="/library">
+              <li>Library</li>
+            </NavLink>
+          </>
+        ) : (
+          b
+        )}
       </MenuWrap>
-      <SubMenuWrap>
-        <MdSearch />
-        <img src="src/resource/img/user1.jpg" alt="?" />
-        <p>User Name</p>
-      </SubMenuWrap>
+      {getCookie("R2USER") && (
+        <>
+          <SubMenuWrap>
+            <MdSearch />
+            <img src="src/resource/img/user1.jpg" alt="?" />
+            <p>User Name</p>
+          </SubMenuWrap>
+        </>
+      )}
     </HeaderWrap>
   );
 }

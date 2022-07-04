@@ -1,24 +1,25 @@
 {
-	"users": [
-		{
-			"id": 1,
-			"name": "Kuller",
-			"profileImg": "src/resource/img/t.png"
-		},
-		{
-			"id": 2,
-			"name": "arkhyeon",
-			"profileImg": "src/resource/img/user1.png"
-		},
-		{
-			"id": 3,
-			"name": "seya",
-			"profileImg": "src/resource/img/c.png"
-		},
-		{
-			"id": 4,
-			"name": "KKH",
-			"profileImg": "src/resource/img/n.png"
-		}
-	]
+  "users": [
+    {
+      "id": 1,
+      "name": "Kuller",
+      "profileImg": "src/resource/img/t.png"
+    },
+
+    {
+      "id": 3,
+      "name": "seya",
+      "profileImg": "src/resource/img/c.png"
+    },
+    {
+      "id": 4,
+      "name": "KKH",
+      "profileImg": "src/resource/img/n.png"
+    }
+  ],
+  "hi": {
+    "id": 2,
+    "name": "arkhyeon",
+    "profileImg": "src/resource/img/user1.jpg"
+  }
 }

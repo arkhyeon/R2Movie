@@ -1,16 +1,50 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
+import { setCookie } from "../lib/cookie";
 
-function UserProfile(props) {
-  console.log(props);
-  return <User>id : {props.id}</User>;
+function UserProfile({ user }) {
+  const accessUser = () => {
+    setCookie("R2USER", user.name);
+  };
+
+  return (
+    <NavLink to={`/${user.name}`} onClick={accessUser}>
+      <UserWrap>
+        <User user={user} />
+        <UserName>{user.name}</UserName>
+      </UserWrap>
+    </NavLink>
+  );
 }
+
+const UserWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+`;
+
 const User = styled.div`
   width: 180px;
   height: 180px;
   border-radius: 10px;
-  background-color: #676aa0;
+  background-image: url(${({ user }) => user.profileImg});
+  background-repeat: round;
+  background-size: cover;
   margin: 0 15px;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+  }
+`;
+
+const UserName = styled.p`
+  color: #ebebeb;
+  font-size: 18px;
 `;
 
 export default UserProfile;

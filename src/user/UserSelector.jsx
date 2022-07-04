@@ -2,36 +2,51 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import axios from "axios";
 import UserProfile from "./UserProfile";
+import { MdAddCircle } from "react-icons/all";
+import { removeCookie } from "../lib/cookie";
+import { userFetch } from "../redux/user";
+import { useDispatch, useSelector } from "react-redux";
 
 function UserSelector() {
-  const [users, setUsers] = useState([]);
+  const users = useSelector((state) => state);
+  const dispatch = useDispatch();
 
+  console.log("remove");
+  removeCookie("R2USER");
   useEffect(() => {
-    getUsers();
+    if (users.length === 0) {
+      getUsers();
+    }
   }, []);
 
   const getUsers = () => {
     axios.get("http://localhost:3100/users").then((res) => {
-      console.log(res);
-      setUsers(res);
+      dispatch(userFetch(res.data));
     });
+  };
+
+  const addUserBtn = () => {
+    if (users.length < 4) {
+      return <MdAddCircle size="210" color="gray" cursor="pointer" />;
+    }
   };
 
   return (
     <>
-      <UserWrap>
+      <UsersWrap>
         <SignText>Who's watching?</SignText>
         <Users>
-          {users.map((user) => {
-            <UserProfile key={user.id} user={user} />;
-          })}
+          {users.map((user) => (
+            <UserProfile key={user.id} user={user} />
+          ))}
+          {addUserBtn()}
         </Users>
-      </UserWrap>
+      </UsersWrap>
     </>
   );
 }
 
-const UserWrap = styled.div`
+const UsersWrap = styled.div`
   width: 100%;
   height: calc(100vh - 177px);
 `;

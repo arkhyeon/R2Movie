@@ -5,6 +5,8 @@ import axios from "axios";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Index from "./template/Index";
 import UserSelector from "./user/UserSelector";
+import Trend from "./Trend";
+import { getCookie } from "./lib/cookie";
 
 function App() {
   const [movie, setMovie] = useState();
@@ -28,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />}>
           <Route path="user" element={<UserSelector />}></Route>
+          <Route path=":id" element={<Trend />} />
         </Route>
       </Routes>
     </Router>
