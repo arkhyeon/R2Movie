@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MdSearch } from "react-icons/all";
 import styled from "@emotion/styled";
-import { NavLink, useLocation, useParams } from "react-router-dom";
-import { getCookie } from "../lib/cookie";
-import { useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Header() {
-  const a = useLocation();
-  const [b, setB] = useState(false);
-  console.log(getCookie("R2USER"));
-  useEffect(() => {
-    setB(a.pathname !== "user");
-  }, [b]);
+  const { pathname } = useLocation();
+
   return (
     <HeaderWrap>
       <MenuWrap>
         <img src="src/resource/img/logo.png" alt="logo" />
-        {b ? (
+        {pathname !== "/user" && (
           <>
             <NavLink to="/trend">
               <li>Trend</li>
@@ -31,11 +25,9 @@ function Header() {
               <li>Library</li>
             </NavLink>
           </>
-        ) : (
-          b
         )}
       </MenuWrap>
-      {getCookie("R2USER") && (
+      {pathname !== "/user" && (
         <>
           <SubMenuWrap>
             <MdSearch />
@@ -65,7 +57,8 @@ const MenuWrap = styled.ul`
     font-weight: 600;
     padding: 0 3rem;
 
-    &:hover {
+    &:hover,
+    &.active {
       color: #676aa8;
     }
   }

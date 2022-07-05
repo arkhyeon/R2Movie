@@ -6,10 +6,11 @@ import { setCookie } from "../lib/cookie";
 function UserProfile({ user }) {
   const accessUser = () => {
     setCookie("R2USER", user.name);
+    setCookie("");
   };
 
   return (
-    <NavLink to={`/${user.name}`} onClick={accessUser}>
+    <NavLink to="/trend" onClick={accessUser}>
       <UserWrap>
         <User user={user} />
         <UserName>{user.name}</UserName>
