@@ -3,10 +3,11 @@ import styled from "@emotion/styled";
 import UserProfile from "./UserProfile";
 import { MdAddCircle } from "react-icons/all";
 import { useSelector } from "react-redux";
+import { userSelector } from "../redux/user";
 
 function UserSelector() {
-  const users = useSelector((state) => state);
-
+  const users = useSelector(userSelector);
+  console.log(users);
   const addUserBtn = () => {
     if (users.length < 4) {
       return <MdAddCircle size="210" color="gray" cursor="pointer" />;

@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { setCookie } from "../lib/cookie";
+import { useDispatch } from "react-redux";
+import { connection } from "../redux/login";
 
 function UserProfile({ user }) {
+  const dispatch = useDispatch();
+
   const accessUser = () => {
-    setCookie("R2USER", user.name);
-    setCookie("");
+    dispatch(connection(user));
   };
 
   return (

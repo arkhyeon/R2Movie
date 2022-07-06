@@ -2,9 +2,14 @@ import React from "react";
 import { MdSearch } from "react-icons/all";
 import styled from "@emotion/styled";
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSelector, termination } from "../redux/login";
 
 function Header() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+
+  const loginUser = useSelector(loginSelector);
 
   return (
     <HeaderWrap>
@@ -29,11 +34,13 @@ function Header() {
       </MenuWrap>
       {pathname !== "/user" && (
         <>
-          <SubMenuWrap>
-            <MdSearch />
-            <img src="src/resource/img/user1.jpg" alt="?" />
-            <p>User Name</p>
-          </SubMenuWrap>
+          <NavLink to="/user">
+            <SubMenuWrap onClick={() => dispatch(termination())}>
+              <MdSearch />
+              <img src={loginUser.profileImg} />
+              <p>{loginUser.name}</p>
+            </SubMenuWrap>
+          </NavLink>
         </>
       )}
     </HeaderWrap>

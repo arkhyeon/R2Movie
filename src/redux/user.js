@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   {
@@ -28,9 +28,10 @@ const users = createSlice({
     },
   },
 });
+const usersState = (state) => state.users;
 
-const usersStore = configureStore({ reducer: users.reducer });
+export const usersReducer = users.reducer;
 
 export const { userFetch } = users.actions;
 
-export default usersStore;
+export const userSelector = createSelector(usersState, (state) => state);
