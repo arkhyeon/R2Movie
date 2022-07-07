@@ -40,3 +40,20 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.swiper .swiper-slide{
+  height:225px;
+}
+
+.swiper-slide:hover div {
+  width:180px;
+  height:270px;
+}
+
+.swiper-slide:hover ~ div > div{
+  transform: translateX(20%);
+}
+
+.swiper .swiper-wrapper{
+  height:270px;
+}

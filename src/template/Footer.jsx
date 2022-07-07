@@ -11,7 +11,7 @@ function Footer() {
 
 const FooterWrap = styled.div`
   width: 100%;
-  height: 120px;
+  height: 34px;
   border-top: 1px solid #ebebeb;
   text-align: center;
   display: flex;
