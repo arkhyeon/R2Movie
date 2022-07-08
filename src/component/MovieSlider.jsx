@@ -23,11 +23,6 @@ function MovieSlider({ contents }) {
       swiper.params.navigation.nextEl = navigationNextRef.current;
     },
     onSwiper: setSwiper,
-    // autoplay: {
-    //   delay: 2500,
-    //   disableOnInteraction: false,
-    //   pauseOnMouseEnter: true,
-    // },
     breakpoints: breakPoint,
   };
 

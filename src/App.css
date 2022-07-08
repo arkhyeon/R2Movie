@@ -45,7 +45,7 @@ button {
   height:225px;
 }
 
-.swiper-slide:hover div {
+.swiper-slide:hover div, .swiper-slide:hover div img {
   width:180px;
   height:270px;
 }

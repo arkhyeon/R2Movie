@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import { useDispatch, useSelector } from "react-redux";
+import { modalSelector, setDisplay } from "../redux/modal";
+import { setMovieDetail } from "../redux/movieDetail";
 
 function MoviePoster({ content }) {
+  const dispatch = useDispatch();
   const a = "#" + parseInt(Math.random() * 0xffffff).toString(16);
 
+  let action = 0;
   return (
-    <ContentWrap>
+    <ContentWrap
+      onMouseEnter={() => {
+        action = setTimeout(() => {
+          dispatch(setDisplay("block"));
+          dispatch(setMovieDetail(content));
+        }, 1000);
+      }}
+      onMouseLeave={() => {
+        clearTimeout(action);
+      }}
+    >
       <PosterWrap
         src={"https://image.tmdb.org/t/p/w200" + content.poster_path}
       />
@@ -15,35 +30,21 @@ function MoviePoster({ content }) {
       {/*>*/}
       {/*  {content}*/}
       {/*</PosterWrap>*/}
-      <HideWrap></HideWrap>
     </ContentWrap>
   );
 }
 
 const ContentWrap = styled.div`
-  & div:hover ~ article {
-    visibility: visible;
-    opacity: 1;
-    height: 200px;
-  }
+  width: 150px;
+  //&:hover img ~ article {
+  //  display: block;
+  //}
 `;
 
 const PosterWrap = styled.img`
   width: 150px;
   height: 225px;
-`;
-
-const HideWrap = styled.article`
-  width: 200px;
-  height: 0px;
-  background-color: azure;
-  visibility: hidden;
-  transition: 1s cubic-bezier(0.25, 0.1, 0, 0);
-  transition-delay: 1s;
-  opacity: 0;
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  cursor: pointer;
 `;
 
 export default MoviePoster;

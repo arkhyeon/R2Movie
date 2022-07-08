@@ -3,6 +3,7 @@ import axios from "axios";
 import { api_key, env } from "../../lib/util";
 import MovieSlider from "../../component/MovieSlider";
 import styled from "@emotion/styled";
+import MovieModal from "../../component/MovieModal";
 
 function Trend() {
   const [latest, setLatest] = useState([
@@ -48,14 +49,17 @@ function Trend() {
   };
 
   return (
-    <SlideWrap>
-      <p>New Contents</p>
-      <MovieSlider contents={latest}></MovieSlider>
-      <p>Today's Trends</p>
-      <MovieSlider contents={dayTrend}></MovieSlider>
-      <p>Weekly Trends</p>
-      <MovieSlider contents={weekTrend}></MovieSlider>
-    </SlideWrap>
+    <>
+      <SlideWrap>
+        <p>New Contents</p>
+        <MovieSlider contents={latest}></MovieSlider>
+        <p>Today's Trends</p>
+        <MovieSlider contents={dayTrend}></MovieSlider>
+        <p>Weekly Trends</p>
+        <MovieSlider contents={weekTrend}></MovieSlider>
+      </SlideWrap>
+      <MovieModal />
+    </>
   );
 }
 
