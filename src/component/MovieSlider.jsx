@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, {useRef, useState} from "react";
+import SwiperCore, {Autoplay, Navigation} from "swiper";
+import {Swiper, SwiperSlide} from "swiper/react";
 import MoviePoster from "./MoviePoster";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/all";
+import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/all";
 import styled from "@emotion/styled";
 import "swiper/css";
 
-function MovieSlider({ contents }) {
+function MovieSlider({ contents, setView, num }) {
   const [swiper, setSwiper] = useState(null);
   const navigationPrevRef = useRef();
   const navigationNextRef = useRef();
@@ -29,13 +29,14 @@ function MovieSlider({ contents }) {
   return (
     <Swiper
       {...swiperOption}
+      onClick={() => setView(num)}
       ref={setSwiper}
       className="mySwiper"
       spaceBetween={-50}
     >
       {contents.map((content) => {
         return (
-          <SwiperSlide key={content.name}>
+          <SwiperSlide key={content.poster_path}>
             <MoviePoster content={content} />
           </SwiperSlide>
         );
