@@ -15,6 +15,7 @@ function MovieMain() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    setView(0);
     if (pathname === "/trend") {
       getTrend();
       setTitle(["New Contents", "Today's Trends", "Weekly Trends"]);
@@ -85,36 +86,22 @@ function MovieMain() {
   };
 
   return (
-    <>
-      <SlideWrap>
-        {view === 1 && <MovieModal />}
-        <p>{title[0]}</p>
-        <MovieSlider
-          contents={firstLine}
-          setView={setView}
-          num={1}
-        ></MovieSlider>
-        {view === 2 && <MovieModal />}
-        <p>{title[1]}</p>
-        <MovieSlider
-          contents={secondLine}
-          setView={setView}
-          num={2}
-        ></MovieSlider>
-        {view === 3 && <MovieModal />}
-        <p>{title[2]}</p>
-        <MovieSlider
-          contents={thirdLine}
-          setView={setView}
-          num={3}
-        ></MovieSlider>
-      </SlideWrap>
-    </>
+    <SlideWrap>
+      {view === 1 && <MovieModal />}
+      <p>{title[0]}</p>
+      <MovieSlider contents={firstLine} setView={setView} num={1} />
+      {view === 2 && <MovieModal />}
+      <p>{title[1]}</p>
+      <MovieSlider contents={secondLine} setView={setView} num={2} />
+      {view === 3 && <MovieModal />}
+      <p>{title[2]}</p>
+      <MovieSlider contents={thirdLine} setView={setView} num={3} />
+    </SlideWrap>
   );
 }
 
 const SlideWrap = styled.div`
-  margin: 0px 15px 25px;
+  margin: 15px 15px 25px;
 
   & > p {
     font-size: 28px;

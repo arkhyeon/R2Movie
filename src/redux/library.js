@@ -7,11 +7,12 @@ const library = createSlice({
   initialState,
   reducers: {
     addLibrary: (state, action) => {
-      return state.push([...state, action.payload]);
+      state.push(action.payload);
     },
-    removeLibrary: (state, action) => {
-      return "";
-    },
+    removeLibrary: (state, action) =>
+      state.filter((lib) => {
+        return lib.id !== action.payload;
+      }),
   },
 });
 

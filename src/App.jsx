@@ -5,6 +5,7 @@ import UserSelector from "./user/UserSelector";
 import MovieMain from "./page/main/MovieMain";
 import ShowMovie from "./page/ShowMovie";
 import Library from "./page/Library";
+import Search from "./page/Search";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="movie" element={<MovieMain />} />
           <Route path="series" element={<MovieMain />} />
           <Route path="library" element={<Library />} />
+          <Route path="search" element={<Search />} />
           <Route path="*" element={<UserSelector />} />
         </Route>
         <Route path="showMovie" element={<ShowMovie />} />

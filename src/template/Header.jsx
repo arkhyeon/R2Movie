@@ -1,9 +1,8 @@
 import React from "react";
-import { MdSearch } from "react-icons/all";
 import styled from "@emotion/styled";
-import { NavLink, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginSelector, termination } from "../redux/login";
+import {NavLink, useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {loginSelector, termination} from "../redux/login";
 
 function Header() {
   const { pathname } = useLocation();
@@ -12,38 +11,47 @@ function Header() {
   const loginUser = useSelector(loginSelector);
 
   return (
-    <HeaderWrap>
-      <MenuWrap>
-        <img src="src/resource/img/logo.png" alt="logo" />
+    <>
+      <HeaderWrap>
+        <MenuWrap>
+          <NavLink to="/trend">
+            <img src="src/resource/img/logo.png" alt="logo" />
+          </NavLink>
+          {pathname !== "/user" && (
+            <>
+              <NavLink to="/trend">
+                <li>Trend</li>
+              </NavLink>
+              <NavLink to="/movie">
+                <li>Movie</li>
+              </NavLink>
+              <NavLink to="/series">
+                <li>Series</li>
+              </NavLink>
+              <NavLink to="/library">
+                <li>Library</li>
+              </NavLink>
+              <NavLink to="/search">
+                <li>Search</li>
+              </NavLink>
+            </>
+          )}
+        </MenuWrap>
         {pathname !== "/user" && (
           <>
-            <NavLink to="/trend">
-              <li>Trend</li>
-            </NavLink>
-            <NavLink to="/movie">
-              <li>Movie</li>
-            </NavLink>
-            <NavLink to="/series">
-              <li>Series</li>
-            </NavLink>
-            <NavLink to="/library">
-              <li>Library</li>
-            </NavLink>
+            <SubMenuWrap>
+              <NavLink to="/user">
+                <img
+                  onClick={() => dispatch(termination())}
+                  src={loginUser.profileImg}
+                />
+                <p onClick={() => dispatch(termination())}>{loginUser.name}</p>
+              </NavLink>
+            </SubMenuWrap>
           </>
         )}
-      </MenuWrap>
-      {pathname !== "/user" && (
-        <>
-          <NavLink to="/user">
-            <SubMenuWrap onClick={() => dispatch(termination())}>
-              <MdSearch />
-              <img src={loginUser.profileImg} />
-              <p>{loginUser.name}</p>
-            </SubMenuWrap>
-          </NavLink>
-        </>
-      )}
-    </HeaderWrap>
+      </HeaderWrap>
+    </>
   );
 }
 
@@ -58,7 +66,7 @@ const MenuWrap = styled.ul`
   display: flex;
   text-align: center;
   line-height: 56px;
-  & a {
+  & a:nth-of-type(n + 2) {
     color: #ebebeb;
     font-size: 18px;
     font-weight: 600;
@@ -84,14 +92,12 @@ const SubMenuWrap = styled.div`
   }
 
   & p {
-    width: 100px;
+    width: fit-content;
   }
 
-  & svg {
-    width: 46px;
-    height: 28px;
-    margin: 14px auto;
-    cursor: pointer;
+  & a {
+    display: flex;
+    color: #ebebeb;
   }
 `;
 

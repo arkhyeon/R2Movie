@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "@emotion/styled";
 import {api_key, env, genres} from "../lib/util";
 
-function ShowMovie(props) {
+function ShowMovie() {
   const { state } = useLocation();
   const [video, setVideo] = useState();
 
@@ -42,7 +42,7 @@ function ShowMovie(props) {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
+        />
       </ShowMovieWrap>
       <MovieInfoWrap>
         <h1>{state.title || state.name}</h1>

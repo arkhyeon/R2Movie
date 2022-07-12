@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
 import {useDispatch, useSelector} from "react-redux";
-import {movieDetailSelector} from "../redux/movieDetail";
+import {movieDetailSelector, setMovieDetail} from "../redux/movieDetail";
 import {genres} from "../lib/util";
 import {MdPlayArrow, MdPlaylistAdd} from "react-icons/all";
 import {useNavigate} from "react-router-dom";
-import {addLibrary} from "../redux/library";
+import {addLibrary, librarySelector, removeLibrary} from "../redux/library";
+import * as _ from "lodash";
 
 function MovieModal() {
   const navigate = useNavigate();
   const movieDetail = useSelector(movieDetailSelector);
+  const library = useSelector(librarySelector);
   const dispatch = useDispatch();
 
   const enterMoviePlay = () => {
@@ -17,7 +19,12 @@ function MovieModal() {
   };
 
   const setLibrary = () => {
-    dispatch(addLibrary(movieDetail));
+    if (!_.find(library, { id: movieDetail.id })) {
+      dispatch(addLibrary(movieDetail));
+    } else {
+      dispatch(removeLibrary(movieDetail.id));
+      dispatch(setMovieDetail({ id: 0 }));
+    }
   };
 
   return (
@@ -38,12 +45,27 @@ function MovieModal() {
                   }
                   return ", " + genres[genreId];
                 })}{" "}
-                |{" "}
-                <b onClick={setLibrary}>
-                  <MdPlaylistAdd size={24} /> 재생 목록에 추가
-                </b>
+                {_.find(library, { id: movieDetail.id }) ? (
+                  <>
+                    |{" "}
+                    <b onClick={setLibrary}>
+                      <MdPlaylistAdd size={24} /> 보관함 제거
+                    </b>
+                  </>
+                ) : (
+                  <>
+                    |{" "}
+                    <b onClick={setLibrary}>
+                      <MdPlaylistAdd size={24} /> 보관함 추가
+                    </b>
+                  </>
+                )}
               </MovieInfo>
-              <MovieInfo>{movieDetail.overview}</MovieInfo>
+              <MovieInfo>
+                {movieDetail.overview?.length > 400
+                  ? movieDetail.overview.slice(0, 400) + "..."
+                  : movieDetail.overview}
+              </MovieInfo>
               <span>
                 평점 : {Math.round(movieDetail.vote_average * 10) / 10} / 10 |
                 투표수 : {movieDetail.vote_count} | 인기도 :{" "}
@@ -93,7 +115,7 @@ const MovieInfoWrap = styled.div`
     transition: 0.3s;
     &:hover {
       background-color: #ebebeb;
-      color: #000;
+      color: #676aa8;
     }
   }
 
@@ -101,6 +123,10 @@ const MovieInfoWrap = styled.div`
     display: block;
     margin-top: 15px;
     font-size: 14px;
+  }
+
+  & p:nth-of-type(1) {
+    width: fit-content;
   }
 `;
 
