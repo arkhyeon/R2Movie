@@ -18,22 +18,7 @@ function Search(props) {
     searchContents();
   }, [page]);
 
-  const handleScroll = () => {
-    if (currentPage >= totalPage) {
-      return;
-    }
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
-    console.log("실행");
-    if (scrollTop + clientHeight >= scrollHeight) {
-      setPage((prev) => {
-        return prev + 1;
-      });
-    }
-  };
-
-  // const handleScroll = _.debounce(() => {
+  // const handleScroll = () => {
   //   if (currentPage >= totalPage) {
   //     return;
   //   }
@@ -46,7 +31,22 @@ function Search(props) {
   //       return prev + 1;
   //     });
   //   }
-  // }, 500);
+  // };
+
+  const handleScroll = _.debounce(() => {
+    if (currentPage >= totalPage) {
+      return;
+    }
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    console.log("실행");
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((prev) => {
+        return prev + 1;
+      });
+    }
+  }, 500);
 
   const searchContents = async (e) => {
     const query = document.querySelector("#searchInput").value;
