@@ -16,8 +16,11 @@ function Library(props) {
   useEffect(() => {
     if (libraries.length !== 0) {
       getRecommendContents();
+    } else {
+      setRecommend([]);
+      setSimilar([]);
     }
-  }, []);
+  }, [libraries]);
 
   const getRecommendContents = () => {
     const recommendId = getRandomIntInclusive(0, libraries.length);

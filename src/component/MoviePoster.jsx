@@ -13,7 +13,8 @@ function MoviePoster({ content }) {
       }}
     >
       <PosterWrap
-        src={"https://image.tmdb.org/t/p/w200" + content.poster_path}
+        src={"https://image.tmdb.org/t/p/w500" + content.poster_path}
+        alt={content.title || content.name}
       />
     </ContentWrap>
   );
@@ -27,6 +28,7 @@ const PosterWrap = styled.img`
   width: 150px;
   height: 225px;
   cursor: pointer;
+  color: #ebebeb;
 `;
 
 export default MoviePoster;

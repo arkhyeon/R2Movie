@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {api_key, env} from "../lib/util";
 import _ from "lodash";
@@ -6,10 +6,49 @@ import styled from "@emotion/styled";
 import {MdSearch} from "react-icons/all";
 import SearchMovie from "../component/SearchMovie";
 
+let currentPage = 1;
+let totalPage = 1;
+let totalResult = 0;
+
 function Search(props) {
   const [searchMovies, setSearchMovies] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const searchContents = () => {
+  useEffect(() => {
+    searchContents();
+  }, [page]);
+
+  const handleScroll = () => {
+    if (currentPage >= totalPage) {
+      return;
+    }
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    console.log("실행");
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((prev) => {
+        return prev + 1;
+      });
+    }
+  };
+
+  // const handleScroll = _.debounce(() => {
+  //   if (currentPage >= totalPage) {
+  //     return;
+  //   }
+  //   const scrollHeight = document.documentElement.scrollHeight;
+  //   const scrollTop = document.documentElement.scrollTop;
+  //   const clientHeight = document.documentElement.clientHeight;
+  //   console.log("실행");
+  //   if (scrollTop + clientHeight >= scrollHeight) {
+  //     setPage((prev) => {
+  //       return prev + 1;
+  //     });
+  //   }
+  // }, 500);
+
+  const searchContents = async (e) => {
     const query = document.querySelector("#searchInput").value;
 
     if (query === "") {
@@ -17,20 +56,35 @@ function Search(props) {
       return;
     }
 
-    axios
-      .get(
-        env.VITE_API + "3/search/multi?" + api_key + "&page=1&query=" + query
-      )
-      .then((res) => {
-        console.log(res.data.results);
-
-        setSearchMovies(actorFiltering(res.data.results));
-      })
-      .catch((e) => {
-        console.log("error");
-        console.log(e);
-      });
+    try {
+      const { data } = await axios.get(
+        env.VITE_API +
+          "3/search/multi?" +
+          api_key +
+          "&page=" +
+          page +
+          "&query=" +
+          query
+      );
+      totalPage = data.total_pages;
+      currentPage = page;
+      totalResult = data.total_results;
+      const real = _.uniqBy(
+        searchMovies.concat(actorFiltering(data.results)),
+        "id"
+      );
+      setSearchMovies(real);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const actorFiltering = (resultArray) => {
     return resultArray.filter((result) => {
@@ -45,13 +99,17 @@ function Search(props) {
           id="searchInput"
           type="text"
           placeholder="Search..."
-          onKeyUp={_.debounce(searchContents, 300)}
+          onKeyUp={_.debounce(searchContents, 1000)}
+          onKeyDown={() => {
+            setPage(1);
+            setSearchMovies([]);
+          }}
         />
         <MdSearch />
       </SearchInputWrap>
       <MovieSearchWrap>
-        {searchMovies.length === 0 && <span>검색 결과가 없습니다.</span>}
-        {searchMovies.map((sm) => {
+        {searchMovies?.length === 0 && <span>검색 결과가 없습니다.</span>}
+        {searchMovies?.map((sm, index) => {
           return <SearchMovie key={sm.id} sm={sm} />;
         })}
       </MovieSearchWrap>
