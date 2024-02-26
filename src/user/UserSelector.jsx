@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "@emotion/styled";
 import UserProfile from "./UserProfile";
-// import {MdAddCircle} from "react-icons/all";
-import {useSelector} from "react-redux";
-import {userSelector} from "../redux/user";
+import { MdAddCircle } from "react-icons/all";
+import { useSelector } from "react-redux";
+import { userSelector } from "../redux/user";
 
 function UserSelector() {
   const users = useSelector(userSelector);
 
-  // const addUserBtn = () => {
-  //   if (users.length < 4) {
-  //     return <MdAddCircle size="210" color="gray" cursor="pointer" />;
-  //   }
-  // };
+  const addUserBtn = () => {
+    if (users.length < 4) {
+      return <MdAddCircle size="210" color="gray" cursor="pointer" />;
+    }
+  };
 
   return (
     <>
@@ -22,7 +22,7 @@ function UserSelector() {
           {users.map((user) => (
             <UserProfile key={user.id} user={user} />
           ))}
-          {/*{addUserBtn()}*/}
+          {addUserBtn()}
         </Users>
       </UsersWrap>
     </>
