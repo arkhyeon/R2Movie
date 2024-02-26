@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import {NavLink, useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {loginSelector, termination} from "../redux/login";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSelector, termination } from "../redux/login";
 
 function Header() {
   const { pathname } = useLocation();
@@ -15,7 +15,7 @@ function Header() {
       <HeaderWrap>
         <MenuWrap>
           <NavLink to="/trend">
-            <img src="/logo.png" alt="logo" />
+            <img src="assets/logo.png" alt="logo" />
           </NavLink>
           {pathname !== "/user" && (
             <>
