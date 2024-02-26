@@ -15,7 +15,7 @@ function Header() {
       <HeaderWrap>
         <MenuWrap>
           <NavLink to="/trend">
-            <img src="src/resource/img/logo.png" alt="logo" />
+            <img src="/logo.png" alt="logo" />
           </NavLink>
           {pathname !== "/user" && (
             <>
