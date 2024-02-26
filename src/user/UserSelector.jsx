@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import UserProfile from "./UserProfile";
-import { MdAddCircle } from "react-icons/all";
+import { MdAddCircle } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { userSelector } from "../redux/user";
 
