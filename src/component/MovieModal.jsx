@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
-import {useDispatch, useSelector} from "react-redux";
-import {movieDetailSelector, setMovieDetail} from "../redux/movieDetail";
-import {genres} from "../lib/util";
-import {MdPlayArrow, MdPlaylistAdd} from "react-icons/all";
-import {useNavigate} from "react-router-dom";
-import {addLibrary, librarySelector, removeLibrary} from "../redux/library";
+import { useDispatch, useSelector } from "react-redux";
+import { movieDetailSelector, setMovieDetail } from "../redux/movieDetail";
+import { genres } from "../lib/util";
+import { MdPlayArrow, MdPlaylistAdd } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { addLibrary, librarySelector, removeLibrary } from "../redux/library";
 import * as _ from "lodash";
 
 function MovieModal() {

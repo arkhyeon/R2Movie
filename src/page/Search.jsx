@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {api_key, env} from "../lib/util";
+import { api_key, env } from "../lib/util";
 import _ from "lodash";
 import styled from "@emotion/styled";
-import {MdSearch} from "react-icons/all";
+import { MdSearch } from "react-icons/md";
 import SearchMovie from "../component/SearchMovie";
 
 let currentPage = 1;

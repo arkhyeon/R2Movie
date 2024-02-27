@@ -1,8 +1,8 @@
-import React, {useRef, useState} from "react";
-import SwiperCore, {Autoplay, Navigation} from "swiper";
-import {Swiper, SwiperSlide} from "swiper/react";
+import React, { useRef, useState } from "react";
+import SwiperCore, { Autoplay, Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import MoviePoster from "./MoviePoster";
-import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/all";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import styled from "@emotion/styled";
 import "swiper/css";
 
