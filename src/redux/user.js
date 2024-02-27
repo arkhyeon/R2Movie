@@ -1,21 +1,21 @@
-import {createSelector, createSlice} from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   {
     id: 1,
     name: "Kuller",
-    profileImg: "/t.png",
+    profileImg: "assets/t.png",
   },
 
   {
     id: 2,
     name: "seya",
-    profileImg: "/c.png",
+    profileImg: "assets/c.png",
   },
   {
     id: 3,
     name: "KKH",
-    profileImg: "/n.png",
+    profileImg: "assets/n.png",
   },
 ];
 
