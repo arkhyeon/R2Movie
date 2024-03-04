@@ -23,7 +23,7 @@ function MovieSlider({ contents, setView, num }) {
       swiper.params.navigation.nextEl = navigationNextRef.current;
     },
     onSwiper: setSwiper,
-    breakpoints: breakPoint,
+    // breakpoints: breakPoint,
   };
 
   return (
@@ -32,7 +32,8 @@ function MovieSlider({ contents, setView, num }) {
       onClick={() => setView(num)}
       ref={setSwiper}
       className="mySwiper"
-      spaceBetween={-50}
+      spaceBetween={15}
+      slidesPerView={"auto"}
     >
       {contents.map((content) => {
         return (
@@ -89,51 +90,43 @@ const SliderButton = styled.div`
   }
 `;
 
-const breakPoint = {
-  165: {
-    slidesPerView: 0,
-    slidesPerGroup: 0,
-  },
-  330: {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-  },
-  495: {
-    slidesPerView: 2,
-    slidesPerGroup: 2,
-  },
-  660: {
-    slidesPerView: 3,
-    slidesPerGroup: 3,
-  },
-  825: {
-    slidesPerView: 4,
-    slidesPerGroup: 4,
-  },
-  990: {
-    slidesPerView: 5,
-    slidesPerGroup: 5,
-  },
-  1155: {
-    slidesPerView: 6,
-    slidesPerGroup: 6,
-  },
-  1320: {
-    slidesPerView: 7,
-    slidesPerGroup: 7,
-  },
-  1485: {
-    slidesPerView: 8,
-    slidesPerGroup: 8,
-  },
-  1650: {
-    slidesPerView: 9,
-    slidesPerGroup: 9,
-  },
-  1815: {
-    slidesPerView: 10,
-    slidesPerGroup: 10,
-  },
-};
+// const breakPoint = {
+//   30: {
+//     slidesPerView: 0,
+//     slidesPerGroup: 0,
+//   },
+//   200: {
+//     slidesPerView: 1,
+//     slidesPerGroup: 1,
+//   },
+//   400: {
+//     slidesPerView: 2,
+//     slidesPerGroup: 2,
+//   },
+//   600: {
+//     slidesPerView: 3,
+//     slidesPerGroup: 3,
+//   },
+//   800: {
+//     slidesPerView: 4,
+//     slidesPerGroup: 4,
+//   },
+//   1200: {
+//     slidesPerView: 5,
+//     slidesPerGroup: 5,
+//   },
+//   1400: {
+//     slidesPerView: 6,
+//     slidesPerGroup: 6,
+//   },
+//   1600: {
+//     slidesPerView: 7,
+//     slidesPerGroup: 7,
+//   },
+//   1800: {
+//     slidesPerView: 8,
+//     slidesPerGroup: 8,
+//   },
+// };
 
 export default MovieSlider;

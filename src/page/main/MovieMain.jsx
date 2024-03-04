@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {api_key, env} from "../../lib/util";
+import { api_key, env } from "../../lib/util";
 import MovieSlider from "../../component/MovieSlider";
 import styled from "@emotion/styled";
 import MovieModal from "../../component/MovieModal";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function MovieMain() {
   const [firstLine, setFirstLine] = useState([]);
@@ -88,13 +88,13 @@ function MovieMain() {
   return (
     <SlideWrap>
       {view === 1 && <MovieModal />}
-      <p>{title[0]}</p>
+      <h2>{title[0]}</h2>
       <MovieSlider contents={firstLine} setView={setView} num={1} />
       {view === 2 && <MovieModal />}
-      <p>{title[1]}</p>
+      <h2>{title[1]}</h2>
       <MovieSlider contents={secondLine} setView={setView} num={2} />
       {view === 3 && <MovieModal />}
-      <p>{title[2]}</p>
+      <h2>{title[2]}</h2>
       <MovieSlider contents={thirdLine} setView={setView} num={3} />
     </SlideWrap>
   );
@@ -103,8 +103,7 @@ function MovieMain() {
 const SlideWrap = styled.div`
   margin: 15px 15px 25px;
 
-  & > p {
-    font-size: 28px;
+  & > h2 {
     color: #ebebeb;
     font-weight: 600;
     margin-bottom: 10px;

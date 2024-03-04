@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
-import {librarySelector} from "../redux/library";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { librarySelector } from "../redux/library";
 import MovieSlider from "../component/MovieSlider";
 import MovieModal from "../component/MovieModal";
 import styled from "@emotion/styled";
 import axios from "axios";
-import {api_key, env} from "../lib/util";
+import { api_key, env } from "../lib/util";
 
 function Library(props) {
   const libraries = useSelector(librarySelector);
@@ -61,17 +61,17 @@ function Library(props) {
   return (
     <SlideWrap>
       {view === 1 && <MovieModal />}
-      <p>My Library</p>
+      <h2>My Library</h2>
       {libraries.length === 0 ? (
-        <NoContents>저장된 컨텐츠가 없습니다.</NoContents>
+        <NoContents className="h2">저장된 컨텐츠가 없습니다.</NoContents>
       ) : (
         <MovieSlider contents={libraries} setView={setView} num={1} />
       )}
       {view === 2 && <MovieModal />}
-      <p>Recommend Contents</p>
+      <h2>Recommend Contents</h2>
       <MovieSlider contents={recommend} setView={setView} num={2} />
       {view === 3 && <MovieModal />}
-      <p>Similar Contents</p>
+      <h2>Similar Contents</h2>
       <MovieSlider contents={similar} setView={setView} num={3} />
     </SlideWrap>
   );
@@ -79,8 +79,7 @@ function Library(props) {
 const SlideWrap = styled.div`
   margin: 15px 15px 25px;
 
-  & > p {
-    font-size: 28px;
+  & > h2 {
     color: #ebebeb;
     font-weight: 600;
     margin-bottom: 10px;
@@ -93,7 +92,6 @@ const NoContents = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
   color: #ebebeb;
   font-weight: 600;
 `;
