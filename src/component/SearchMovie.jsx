@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import {genres} from "../lib/util";
-import {useNavigate} from "react-router-dom";
+import { genres } from "../lib/util";
+import { useNavigate } from "react-router-dom";
+import Badge from "./badge";
 
 function SearchMovie({ sm }) {
   const navigate = useNavigate();
@@ -19,22 +20,18 @@ function SearchMovie({ sm }) {
           }%, #DEDEDE ${sm.vote_average * 10}% 100% )`,
         }}
       >
-        <div>{sm.vote_average}</div>
+        <div>{Math.round(sm.vote_average * 10) / 10}</div>
       </AvgPoint>
       <SearchInfoWrap>
-        <p>제목 : {sm.title || sm.name}</p>
+        <h6>{sm.title || sm.name}</h6>
+        <div>
+          {sm.genre_ids.map((genreId) => (
+            <Badge>{genres[genreId]}</Badge>
+          ))}
+        </div>
         <p>
-          장르 :{" "}
-          {sm.genre_ids.map((genreId, i) => {
-            if (i === 0) {
-              return " " + genres[genreId];
-            }
-            return ", " + genres[genreId];
-          })}
-        </p>
-        <p>
-          {sm.overview?.length > 100
-            ? sm.overview.slice(0, 100) + "..."
+          {sm.overview?.length > 130
+            ? sm.overview.slice(0, 130) + "..."
             : sm.overview}
         </p>
       </SearchInfoWrap>
@@ -65,9 +62,16 @@ const PosterWrap = styled.img`
 
 const SearchInfoWrap = styled.div`
   padding: 10px;
+  overflow: hidden;
 
-  & p {
-    margin-bottom: 10px;
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 8px 10px 0;
+    .badge {
+      font-size: 12px;
+    }
   }
 `;
 

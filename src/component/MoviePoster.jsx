@@ -20,12 +20,11 @@ const ContentWrap = styled.div`
   width: 150px;
 `;
 
-const PosterWrap = styled.div`
+const PosterWrap = styled.img`
   width: 150px;
   height: 225px;
   cursor: pointer;
   color: #ebebeb;
-  background-color: #676aa8;
 `;
 
 export default MoviePoster;

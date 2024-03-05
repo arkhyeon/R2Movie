@@ -56,7 +56,7 @@ function MovieModal() {
                 <Badge key={genreId}>{genres[genreId]}</Badge>
               ))}
             </MovieInfo>
-            <MovieInfo className="mobile_none">
+            <MovieInfo>
               {movieDetail.overview?.length > 80
                 ? movieDetail.overview.slice(0, 80) + "..."
                 : movieDetail.overview}
@@ -79,14 +79,9 @@ const ModalContent = styled.div`
   height: 500px;
   background: url(${(props) => {
       return "https://image.tmdb.org/t/p/original" + props.url;
-      // return "src/component/123.png";
     }})
     no-repeat;
   background-size: 100%;
-
-  & .badge {
-    font-size: 14px;
-  }
 `;
 
 const MovieInfoWrap = styled.div`

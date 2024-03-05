@@ -31,7 +31,6 @@ function UserSelector() {
 
 const UsersWrap = styled.div`
   width: 100%;
-  height: calc(100vh - 100px);
   justify-content: center;
   align-items: center;
   display: flex;
@@ -47,7 +46,7 @@ const Users = styled.ul`
 `;
 
 const SignText = styled.div`
-  font-size: 52px;
+  font-size: calc(1.375rem + 3vw);
   font-weight: bolder;
   color: #ebebeb;
   text-align: center;

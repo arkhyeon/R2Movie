@@ -68,65 +68,26 @@ const SliderButton = styled.div`
     opacity: 1;
   }
 
-  top: 0px;
+  top: 0;
   &.leftBtn {
-    left: 0px;
+    left: 0;
     background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.8) 0%,
       rgba(95, 95, 95, 0) 100%
     );
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0 10px 10px 0;
   }
 
   &.rightBtn {
-    right: 0px;
+    right: 0;
     background: linear-gradient(
       270deg,
       rgba(0, 0, 0, 0.8) 0%,
       rgba(95, 95, 95, 0) 100%
     );
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 0 0 10px;
   }
 `;
-
-// const breakPoint = {
-//   30: {
-//     slidesPerView: 0,
-//     slidesPerGroup: 0,
-//   },
-//   200: {
-//     slidesPerView: 1,
-//     slidesPerGroup: 1,
-//   },
-//   400: {
-//     slidesPerView: 2,
-//     slidesPerGroup: 2,
-//   },
-//   600: {
-//     slidesPerView: 3,
-//     slidesPerGroup: 3,
-//   },
-//   800: {
-//     slidesPerView: 4,
-//     slidesPerGroup: 4,
-//   },
-//   1200: {
-//     slidesPerView: 5,
-//     slidesPerGroup: 5,
-//   },
-//   1400: {
-//     slidesPerView: 6,
-//     slidesPerGroup: 6,
-//   },
-//   1600: {
-//     slidesPerView: 7,
-//     slidesPerGroup: 7,
-//   },
-//   1800: {
-//     slidesPerView: 8,
-//     slidesPerGroup: 8,
-//   },
-// };
 
 export default MovieSlider;

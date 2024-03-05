@@ -1,14 +1,17 @@
-import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "@emotion/styled";
-import {api_key, env, genres} from "../lib/util";
+import { api_key, env, genres } from "../lib/util";
+import Badge from "../component/badge";
+import { MdPerson } from "react-icons/md";
 
 function ShowMovie() {
   const { state } = useLocation();
   const [video, setVideo] = useState();
 
   useEffect(() => {
+    console.log(state);
     getVideo();
   }, []);
 
@@ -17,6 +20,7 @@ function ShowMovie() {
     if (state.first_air_date) {
       kind = "tv/";
     }
+
     axios
       .get(
         env.VITE_API +
@@ -27,10 +31,7 @@ function ShowMovie() {
           api_key +
           "&append_to_response=videos"
       )
-      .then((res) => {
-        console.log(res);
-        setVideo(res.data.results[0].key);
-      })
+      .then((res) => setVideo(res.data.results[0].key))
       .catch((e) => console.log(e));
   };
 
@@ -47,19 +48,18 @@ function ShowMovie() {
       <MovieInfoWrap>
         <h1>{state.title || state.name}</h1>
         <MovieInfo>
-          {state.release_date || state.first_air_date} |
-          {state.genre_ids.map((genreId, i) => {
-            if (i === 0) {
-              return " " + genres[genreId];
-            }
-            return ", " + genres[genreId];
-          })}
+          <Badge>{state.release_date || state.first_air_date}</Badge>
+          {state.genre_ids.map((genreId) => (
+            <Badge key={genreId}>{genres[genreId]}</Badge>
+          ))}
         </MovieInfo>
         <MovieInfo>{state.overview}</MovieInfo>
-        <span>
-          평점 : {Math.round(state.vote_average * 10) / 10} / 10 | 투표수 :{" "}
-          {state.vote_count} | 인기도 : {Math.round(state.popularity * 10) / 10}
-        </span>
+        <MovieInfo>
+          <Badge>
+            {Math.round(state.vote_average * 10) / 10} / 10
+            <MdPerson size={18} /> {state.vote_count}
+          </Badge>
+        </MovieInfo>
       </MovieInfoWrap>
     </>
   );
@@ -81,29 +81,15 @@ const ShowMovieWrap = styled.div`
 `;
 
 const MovieInfoWrap = styled.div`
-  width: calc(100% - 100px);
-  padding: 0px 50px 30px;
-  background: #141414;
+  padding: 0 calc(15px + 2vw) 30px;
   color: #ebebeb;
-  & h1 {
-    width: fit-content;
-    display: flex;
-    font-size: 56px;
-    font-weight: 700;
-    margin-bottom: 30px;
-  }
-
-  & span {
-    display: block;
-    margin-top: 15px;
-    font-size: 14px;
-  }
 `;
 
 const MovieInfo = styled.p`
-  width: fit-content;
-  color: #ebebeb;
   margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 `;
 
 export default ShowMovie;
